@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
-\usepackage{graphicx,hyperref,lipsum,multicol}
+\usepackage{amsmath,graphicx,hyperref,lipsum,multicol}
 \title{Analyzing Movies Using Phrase Mining}
 \author{Daniel Lee \and Huilai Miao \and Yuxuan Fan}
 
@@ -19,18 +19,23 @@ Movies often capture human culture and major events throughout time. We can retr
 Previous work addresses either a comprehensive analysis of movie history or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited since they tend to use extract words or phrases via the use of raw frequencies instead of a sophisticated phrase mining technique such as AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach to apply phrase mining to the analysis of movies.
 
 \section{Data}
-Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP}.
-\end{multicols}
+Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP}. The dataset consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase. Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English, as the dataset is extracted from English Wikipedia. The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study.
 
-\begin{figure}[h]
+\begin{figure*}
 \centering
 \caption{Number of movies in the dataset}
-\includegraphics[width=5in]{figures/number_movies_per_year_bar_chart.png}
-\end{figure}
-\begin{multicols}{2}
+\includegraphics[width=5.5in]{figures/number_movies_per_year_bar_chart.png}
+\label{figure:number_movies_per_year_bar_chart}
+\end{figure*}
 
 \section{Methods}
+Our analysis consists of three parts: exploratory data analysis (EDA), classification, and clustering.
 \subsection{EDA}
+Here, the tf-idf with sublinear tf scaling for a term $t$ of a document $d$ is given by
+
+$$\text{tf-idf}(t, d) = (1 + \log\text{tf}(t, d)) \cdot \left(\log\frac{1 + n}{\text{1 + df}(t)} + 1\right)$$
+
+where $n$ is the total number of documents and $\text{df}(t)$ is the document frequency of $t$.
 \subsection{Classification}
 \subsection{Clustering}
 
