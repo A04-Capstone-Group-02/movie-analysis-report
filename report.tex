@@ -1,8 +1,8 @@
 \documentclass[hidelinks]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=.8in]{geometry}
-\usepackage{amsmath,graphicx,hyperref,lipsum,multicol}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,caption,graphicx,hyperref,lipsum,multicol,tabularx}
 \title{Analyzing Movies Using Phrase Mining}
 \author{Daniel Lee \and Huilai Miao \and Yuxuan Fan}
 
@@ -10,23 +10,42 @@
 \maketitle
 
 \begin{abstract}
+Movies often capture human culture and major events over time.
 \end{abstract}
 
 \begin{multicols}{2}
 \section{Introduction}
-Movies often capture human culture and major events throughout time. We can retrieve these expressions of human culture and events through a comprehensive textual analysis of movie plots. Here, we propose an analysis of movie plots through the use of phrase mining to extract key phrases that correspond to discrete entities of human culture and events. Such an analysis can help us better understand change of popular topics, public attitudes, major themes, and how overall human culture has progressed throughout history. This analysis is novel since we extract history from movies, an unconventional source, instead of relying on historical texts directly; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases which can provide relevant and insightful keywords for further research by the reader. We perform this analysis on a large dataset of movie plot summaries from English movies over the past century.
+Movies often capture human culture and major events over time. We can learn from this rich source of human history through a comprehensive textual analysis of movies, i.e., movie plot summaries. Here, we propose an analysis of movie plots by extracting key phrases corresponding to discrete entities of human culture and events. Such an analysis can help us better understand change of popular topics, public attitudes, major themes, and the overall progression of human culture throughout history. This analysis is novel since we extract history from movie plots, an unconventional source, instead of relying on historical texts directly; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that provide relevant keywords for further research by the reader.
 
-Previous work addresses either a comprehensive analysis of movie history or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited since they tend to use extract words or phrases via the use of raw frequencies instead of a sophisticated phrase mining technique such as AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach to apply phrase mining to the analysis of movies.
+Previous work addresses either an analysis of movie plots or the use of phrase mining for keyword extraction, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies plots.
 
 \section{Data}
-Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP}. The dataset consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase. Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English, as the dataset is extracted from English Wikipedia. The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study.
+Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP} and consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase. The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:dataset} describes the variables of the processed dataset. Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English (as the dataset is extracted from English Wikipedia).
 
 \begin{figure*}
-\centering
 \caption{Number of movies in the dataset}
-\includegraphics[width=5.5in]{figures/number_movies_per_year_bar_chart.png}
+\centering
+\includegraphics[width=5in]{figures/number_movies_per_year_bar_chart.png}
 \label{figure:number_movies_per_year_bar_chart}
 \end{figure*}
+
+\begin{table*}
+\caption{Dataset description}
+\centering
+\begin{tabularx}{.9\textwidth}{llX}
+    \textbf{Variable} & \textbf{Description} & \textbf{Example} \\
+    \hline
+    name & Movie name & Star Wars Episode IV: A New Hope \\
+    date & Movie release date & 1977-05-25 \\
+    revenue & Movie box office revenue (USD) & 775,398,007 \\
+    runtime & Movie runtime (minutes) & 122 \\
+    languages & Movie languages & \{English\} \\
+    countries & Movie countries & \{United States of America\} \\
+    genres & Movie genres & \{Action, Adventure, Coming-of-age, Family, Fantasy, Science Fiction, Space western\} \\
+    summary & Movie plot summary & The film begins with an opening crawl explaining that the galaxy is in a state of civil war and that spies for the Rebel Alliance have\ldots \\
+\end{tabularx}
+\label{table:dataset}
+\end{table*}
 
 \section{Methods}
 Our analysis consists of three parts: exploratory data analysis (EDA), classification, and clustering.
