@@ -1,7 +1,7 @@
 \documentclass[hidelinks]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=.8in]{geometry}
 \usepackage{amsmath,graphicx,hyperref,lipsum,multicol}
 \title{Analyzing Movies Using Phrase Mining}
 \author{Daniel Lee \and Huilai Miao \and Yuxuan Fan}
@@ -32,9 +32,7 @@ Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie
 Our analysis consists of three parts: exploratory data analysis (EDA), classification, and clustering.
 \subsection{EDA}
 Here, the tf-idf with sublinear tf scaling for a term $t$ of a document $d$ is given by
-
 $$\text{tf-idf}(t, d) = (1 + \log\text{tf}(t, d)) \cdot \left(\log\frac{1 + n}{\text{1 + df}(t)} + 1\right)$$
-
 where $n$ is the total number of documents and $\text{df}(t)$ is the document frequency of $t$.
 \subsection{Classification}
 \subsection{Clustering}
