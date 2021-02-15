@@ -10,25 +10,25 @@
 \maketitle
 
 \begin{abstract}
-Movies often capture human culture and major events over time.
+Movies often capture human culture and major events across time. As a result, movies are an unconventional but rich source of human history from which we can derive insight. Previous work addresses either an analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose an analysis of movie plots by extracting key phrases from movie plot summaries using AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}, a sophisticated phrase mining framework. Using these phrases, we provide an analysis of movies through an exploratory data analysis that examines the progression of human culture throughout time, the development and interpretation of a classification model that predicts movie genre, and the development and interpretation of a clustering model that clusters movies. By applying phrase mining to movie plots, we provide a unique perspective in understanding human culture.
 \end{abstract}
 
 \begin{multicols}{2}
 \section{Introduction}
-Movies often capture human culture and major events over time. We can learn from this rich source of human history through a comprehensive textual analysis of movies, i.e., movie plot summaries.
+Movies often capture human culture and major events across time. We can learn from this rich source of human history through a comprehensive textual analysis of movies, i.e., movie plot summaries.
 
 Here, we propose an analysis of movie plots by extracting key phrases corresponding to discrete entities of human culture and events. Such an analysis can help us better understand change of popular topics, public attitudes, major themes, and the overall progression of human culture throughout history.
 
 This analysis is novel since we extract history from movie plots, an unconventional source, instead of relying on historical texts directly; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that provide relevant keywords for further research by the reader.
 
-Previous work addresses either an analysis of movie plots or the use of phrase mining for keyword extraction, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies plots.
+Previous work addresses either an analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies plots.
 
 \section{Data}
 Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP} and consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase.
 
 The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:dataset} describes the variables of the processed dataset. Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English (as the dataset is extracted from English Wikipedia).
 
-The variable of focus here is \texttt{summary}, from which we extract phrases to drive our analysis.
+The variable of focus here is \texttt{summary}, from which we extract key phrases to drive our analysis.
 
 \begin{figure*}
 \caption{Number of movies in the dataset}
@@ -68,7 +68,7 @@ We first train AutoPhrase on all movie plot summaries in the dataset, then extra
 \label{figure:key_phrases_example}
 \end{figure*}
 
-Our analysis consists of three parts: exploratory data analysis (EDA), classification, and clustering.
+Our analysis consists of three parts that build off of these key phrases: an exploratory data analysis (EDA) that examines the progression of human culture throughout time, the development and interpretation of a classification model that predicts movie genre, and the development and interpretation of a clustering model that clusters movies into distinct groups that may not necessarily correspond to movie genres. We expect the combination of these three methods to give us valuable insight into human culture.
 \subsection{EDA}
 Here, the tf-idf with sublinear tf scaling for a term $t$ of a document $d$ is given by
 $$\text{tf-idf}(t, d) = (1 + \log\text{tf}(t, d)) \cdot \left(\log\frac{1 + n}{\text{1 + df}(t)} + 1\right)$$
