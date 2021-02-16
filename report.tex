@@ -9,12 +9,12 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
+\begin{abstract} % What did I do?
 Movies often capture human culture and major events across time. As a result, movies are an unconventional but rich source of human history from which we can derive insight. Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose a novel analysis of movie plots by extracting key phrases from movie plot summaries using AutoPhrase, a phrase mining framework. Using these phrases, we analyze movies through 1) an exploratory data analysis that examines the progression of human culture over time, 2) the development and interpretation of a classification model that predicts movie genre, and 3) the development and interpretation of a clustering model that clusters movies. We see that this application of phrase mining to movie plots provides results consistent with human history and provides a unique perspective in understanding human culture.
 \end{abstract}
 
 \begin{multicols}{2}
-\section{Introduction}
+\section{Introduction} % What is the problem?
 Movies often capture human culture and major events across time. We can learn from this rich source of human history through a comprehensive textual analysis of movies, i.e., movie plot summaries.
 
 Here, we propose an analysis of movie plots by extracting key phrases corresponding to discrete entities of human culture and events. Such an analysis can help us better understand change of popular topics, public attitudes, major themes, and the overall progression of human culture throughout history.
@@ -55,7 +55,7 @@ The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure
 
 The variable of focus here is \texttt{summary}, from which we extract key phrases to drive our analysis.
 
-\section{Methods}
+\section{Methods} % How did I approach it?
 We first extract key phrases from \texttt{summary} using AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}, a phrase mining framework that extracts high-quality phrases from a given text corpus. We use AutoPhrase for its ability to extract high-quality phrases more effectively than traditional, rudimentary, phrase mining techniques, while maintaining minimal human effort during training.
 
 We first train AutoPhrase on all movie plot summaries in the dataset, then extract the key phrases from each individual summary and add these phrases as a variable in our dataset as seen in Table \ref{table:additional_variables}. Figure \ref{figure:key_phrases_example} gives an example of phrases extracted from a movie plot summary by AutoPhrase.
@@ -101,7 +101,7 @@ Given a tf-idf vector for each period of time, we then normalize each tf-idf vec
 \subsection{Classification}
 \subsection{Clustering}
 
-\section{Results}
+\section{Results} % What did I find out?
 \subsection{EDA}
 
 \begin{figure*}
@@ -114,13 +114,13 @@ Given a tf-idf vector for each period of time, we then normalize each tf-idf vec
 \subsection{Classification}
 \subsection{Clustering}
 
-\section{Discussion}
+\section{Discussion} % What did it mean?
 
-\bibliographystyle{plain}
+\bibliographystyle{plain} % Who did I cite?
 \nocite{10.1145/2723372.2751523}
 \bibliography{report}
 
-\section{Appendix}
+\section{Appendix} % Details!
 \begin{figure*}
 \caption{Top phrases by year}
 \centering
