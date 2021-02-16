@@ -61,7 +61,7 @@ We first extract key phrases from \texttt{summary} using AutoPhrase \cite{DBLP:j
 We first train AutoPhrase on all movie plot summaries in the dataset, then extract the key phrases from each individual summary and add these phrases as a variable in our dataset as seen in Table \ref{table:additional_variables}. Figure \ref{figure:key_phrases_example} gives an example of phrases extracted from a movie plot summary by AutoPhrase.
 
 \begin{table*}
-\caption{Additional variables}
+\caption{Added variables}
 \centering
 \begin{tabularx}{.8\textwidth}{llX}
     \textbf{Variable} & \textbf{Description} & \textbf{Example} \\
@@ -98,11 +98,28 @@ $$\text{tf-idf}(t, d) = (1 + \log\text{tf}(t, d)) \cdot \left(\log\frac{1 + n}{\
 where $n$ is the total number of documents and $\text{df}(t)$ is the document frequency of $t$.
 
 Given a tf-idf vector for each period of time, we then normalize each tf-idf vector to have a Euclidean norm of 1.
+
+Finally, we consider the phrases with the highest tf-idf values to be the "top" phrases for the corresponding time period.
 \subsection{Classification}
 \subsection{Clustering}
 
 \section{Results} % What did I find out?
 \subsection{EDA}
+Figure \ref{figure:top_phrases_by_decade} displays the top phrases by decade.
+\begin{itemize}
+    \item 1900s:
+    \item 1910s:
+    \item 1920s:
+    \item 1930s:
+    \item 1940s:
+    \item 1950s:
+    \item 1960s:
+    \item 1970s:
+    \item 1980s:
+    \item 1990s:
+    \item 2000s:
+    \item 2010s:
+\end{itemize}
 
 \begin{figure*}
 \caption{Top phrases by decade, with corresponding highest-grossing movie}
@@ -115,6 +132,7 @@ Given a tf-idf vector for each period of time, we then normalize each tf-idf vec
 \subsection{Clustering}
 
 \section{Discussion} % What did it mean?
+For future work, we may consider filtering movie actor names from top phrases in the EDA, as actors, unless historically significant, are not central to our analysis of human culture.
 
 \bibliographystyle{plain} % Who did I cite?
 \nocite{10.1145/2723372.2751523}
