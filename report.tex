@@ -1,4 +1,4 @@
-\documentclass[hidelinks]{article}
+\documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
@@ -10,7 +10,7 @@
 \maketitle
 
 \begin{abstract} % What did I do?
-Movies often capture human culture and major events across time. As a result, movies are an unconventional but rich source of human history from which we can derive insight. Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose a novel analysis of movie plots by extracting key phrases from movie plot summaries using AutoPhrase, a phrase mining framework. Using these phrases, we analyze movies through 1) an exploratory data analysis that examines the progression of human culture over time, 2) the development and interpretation of a classification model that predicts movie genre, and 3) the development and interpretation of a clustering model that clusters movies. We see that this application of phrase mining to movie plots provides results consistent with human history and provides a unique perspective in understanding human culture.
+Movies often capture human culture and major events across time. As a result, movies are an unconventional but rich source of human history from which we can derive insight. Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose a novel analysis of movies by extracting key phrases from movie plot summaries using AutoPhrase, a phrase mining framework. Using these phrases, we analyze movies through 1) an exploratory data analysis that examines the progression of human culture over time, 2) the development and interpretation of a classification model that predicts movie genre, and 3) the development and interpretation of a clustering model that clusters movies. We see that this application of phrase mining to movie plots provides results consistent with human history and provides a unique perspective in understanding human culture.
 \end{abstract}
 
 \begin{multicols}{2}
@@ -21,12 +21,12 @@ Here, we propose an analysis of movie plots by extracting key phrases correspond
 
 This analysis is novel since we extract history from movie plots, an unconventional source, instead of relying on historical texts directly; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that serve as relevant keywords for further research by the reader.
 
-Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies plots.
+Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movie plots.
 
 \section{Data}
 Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP} and consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase.
 
-The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:variables} describes the processed dataset. Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English (as the dataset is extracted from English Wikipedia).
+The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:variables} describes the processed dataset.
 
 \begin{figure*}
 \caption{Number of movies in the dataset}
@@ -52,6 +52,8 @@ The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure
 \end{tabularx}
 \label{table:variables}
 \end{table*}
+
+Although movies can come from different countries and may be in different languages, all of the movie plot summaries are in English (as the dataset is extracted from English Wikipedia).
 
 The variable of focus here is \texttt{summary}, from which we extract key phrases to drive our analysis.
 
@@ -79,7 +81,7 @@ We first train AutoPhrase on all movie plot summaries in the dataset, then extra
 \label{figure:key_phrases_example}
 \end{figure*}
 
-Nearly all extracted phrases are indeed high-quality and describe ideas, events, objects, and characters in the movie plot well.
+Nearly all extracted phrases are indeed high-quality and encapsulate ideas, events, objects, and characters in the movie plot well.
 
 Our analysis consists of three parts that build off of these extracted phrases:
 \begin{enumerate}
@@ -87,9 +89,9 @@ Our analysis consists of three parts that build off of these extracted phrases:
     \item The development and interpretation of a classification model that predicts movie genre.
     \item The development and interpretation of a clustering model that clusters movies.
 \end{enumerate}
-We expect the combination of these three methods to give us valuable insight into human culture.
+The combination of these three methods can give us valuable insight into human culture.
 \subsection{EDA}
-We perform an EDA to discover how human culture and events have evolved throughout time. Here, we use statistical signals, i.e., tf-idf, to identity when certain phrases (ideally corresponding to discrete entities of of human culture and events) are popular and relevant.
+We perform an EDA to discover how human culture and events have progressed over time. Here, we use statistical signals, i.e., tf-idf, to identity when certain phrases (corresponding to discrete entities of of human culture and events) are popular and relevant.
 
 We use tf-idf to measure a phrase's relevance in time where each phrase is a term and each period of time (e.g. a year or decade) is a document. We use sublinear term frequency (tf) scaling to reduce the significance of very common phrases (e.g. ``film'', ``life'') that are uninformative in our analysis.
 
@@ -99,13 +101,17 @@ where $n$ is the total number of documents and $\text{df}(t)$ is the document fr
 
 Given a tf-idf vector for each period of time, we then normalize each tf-idf vector to have a Euclidean norm of 1.
 
-Finally, we consider the phrases with the highest tf-idf values to be the "top" phrases for the corresponding time period.
+Finally, we define ``top'' phrases as the phrases with the highest tf-idf values for the corresponding period of time.
 \subsection{Classification}
 \subsection{Clustering}
 
 \section{Results} % What did I find out?
 \subsection{EDA}
-Figure \ref{figure:top_phrases_by_decade} displays the top phrases by decade.
+Figure \ref{figure:top_phrases_by_decade} shows top phrases by decade, where ``top'' phrases are defined earlier as the phrases with the highest tf-idf values for the corresponding decade.
+
+To give context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade.
+
+We now examine the results by decade:
 \begin{itemize}
     \item 1900s:
     \item 1910s:
@@ -121,7 +127,7 @@ Figure \ref{figure:top_phrases_by_decade} displays the top phrases by decade.
     \item 2010s:
 \end{itemize}
 
-Figure \ref{figure:top_phrases_by_decade} in \nameref{appendix} goes into finer detail by displaying top phrases by year, rather than decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}.
+Figure \ref{figure:top_phrases_by_decade} in \nameref{appendix} goes into finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}.
 
 \begin{figure*}
 \caption{Top phrases by decade, with corresponding highest-grossing movie}
@@ -140,7 +146,7 @@ For future work, we may consider filtering movie actor names from top phrases in
 \nocite{10.1145/2723372.2751523}
 \bibliography{report}
 
-\section{Appendix} \label{appendix}% Details!
+\section{Appendix} \label{appendix} % Details!
 \begin{figure*}
 \caption{Top phrases by year}
 \centering
