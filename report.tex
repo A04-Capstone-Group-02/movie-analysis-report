@@ -10,18 +10,18 @@
 \maketitle
 
 \begin{abstract} % What did I do?
-Movies often capture human culture and major events across time. As a result, movies are an unconventional but rich source of human history from which we can derive insight. Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose a novel analysis of movies by extracting key phrases from movie plot summaries using AutoPhrase, a phrase mining framework. Using these phrases, we analyze movies through 1) an exploratory data analysis that examines the progression of human culture over time, 2) the development and interpretation of a classification model that predicts movie genre, and 3) the development and interpretation of a clustering model that clusters movies. We see that this application of phrase mining to movie plots provides results consistent with human history and provides a unique perspective in understanding human culture.
+Movies are a rich source of human culture from which we can derive insight. Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Here, we propose a novel analysis of movies by extracting key phrases from movie plot summaries using AutoPhrase, a phrase mining framework. Using these phrases, we analyze movies through 1) an exploratory data analysis that examines the progression of human culture over time, 2) the development and interpretation of a classification model that predicts movie genre, and 3) the development and interpretation of a clustering model that clusters movies. We see that this application of phrase mining to movie plots provides a unique insight into human culture while remaining accessible to a general audience, e.g., history non-experts.
 \end{abstract}
 
 \begin{multicols}{2}
 \section{Introduction} % What is the problem?
-Movies often capture human culture and major events across time. We can learn from this rich source of human history through a comprehensive textual analysis of movies, i.e., movie plot summaries.
+Movies are a rich source of human culture from which we can derive insight through a comprehensive textual analysis of movie plot summaries.
 
-Here, we propose an analysis of movie plots by extracting key phrases corresponding to discrete entities of human culture and events. Such an analysis can help us better understand change of popular topics, public attitudes, major themes, and the overall progression of human culture throughout history.
+Here, we propose an analysis of movies by extracting key phrases corresponding to discrete entities of human culture. Such an analysis can help us better understand popular topics, public attitudes, major themes, and the overall progression of human culture throughout history.
 
-This analysis is novel since we extract history from movie plots, an unconventional source, instead of relying on historical texts directly; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that serve as relevant keywords for further research by the reader.
+This analysis is novel since we extract human culture from movies, an unconventional source, instead of relying on traditional sources, e.g., historical texts; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that serve as relevant keywords for further research by the reader.
 
-Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movie plots.
+Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies.
 
 \section{Data}
 Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP} and consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase.
@@ -109,7 +109,7 @@ Finally, we define ``top'' phrases as the phrases with the highest tf-idf values
 \subsection{EDA}
 Figure \ref{figure:top_phrases_by_decade} shows top phrases by decade, where top phrases are defined earlier as the phrases with the highest tf-idf values for the corresponding decade.
 
-To give context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade.
+To give context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade. In the case of a tie in gross revenue, we pick the movie with the earliest release date.
 
 We now examine the results by decade:
 \begin{itemize}
@@ -127,12 +127,12 @@ We now examine the results by decade:
     \item 2010s:
 \end{itemize}
 
-Figure \ref{figure:top_phrases_by_decade} in \nameref{appendix} goes into finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}.
+Figure \ref{figure:top_phrases_by_year} in \nameref{appendix} goes into finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}.
 
 \begin{figure*}
 \caption{Top phrases by decade, with corresponding highest-grossing movie}
 \centering
-\adjincludegraphics[width=.9\textwidth]{figures/top_phrases_by_decade_bar_chart.png}
+\includegraphics[width=.95\textwidth]{figures/top_phrases_by_decade_bar_chart.png}
 \label{figure:top_phrases_by_decade}
 \end{figure*}
 
