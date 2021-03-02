@@ -21,12 +21,12 @@ Here, we propose an analysis of movies by extracting key phrases corresponding t
 
 This analysis is novel since we extract human culture from movies, an unconventional source, instead of relying on traditional sources, e.g., historical texts; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history non-experts, as we extract key phrases that serve as relevant keywords for further research by the reader.
 
-Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to use extract n-grams using raw frequencies instead of a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies.
+Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to simply extract n-grams using raw frequencies instead of using a sophisticated phrase mining framework such as \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} \cite{DBLP:journals/corr/ShangLJRVH17}. Here, we explore a novel approach by applying phrase mining to the analysis of movies.
 
 \section{Data}
 Our dataset comes from the \href{http://www.cs.cmu.edu/~ark/personas/}{CMU Movie Summary Corpus} \cite{Bamman2013LearningLP} and consists of movie plot summaries extracted from Wikipedia and movie metadata extracted from Freebase.
 
-The dataset consists of around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:variables} describes the processed dataset.
+The dataset contains around 42,000 movies from 1893 to 2014 as seen in Figure \ref{figure:number_movies_per_year_bar_chart}, a sizable dataset for our study. Table \ref{table:variables} describes the variables of the processed dataset.
 
 \begin{figure*}
 \caption{Number of movies in the dataset}
@@ -58,7 +58,7 @@ Although movies can come from different countries and may be in different langua
 The variable of focus here is \texttt{summary}, from which we extract key phrases to drive our analysis.
 
 \section{Methods} % How did I approach it?
-We first extract key phrases from \texttt{summary} using AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}, a phrase mining framework that extracts high-quality phrases from a given text corpus. We use AutoPhrase for its ability to extract high-quality phrases more effectively than traditional, rudimentary, phrase mining techniques, while maintaining minimal human effort during training.
+We first extract key phrases from \texttt{summary} using AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}, a phrase mining framework that extracts high-quality phrases from a given text. We use AutoPhrase for its ability to extract high-quality phrases more effectively than traditional, rudimentary, phrase mining techniques, while maintaining minimal human effort during training.
 
 We first train AutoPhrase on all movie plot summaries in the dataset, then extract the key phrases from each individual summary and add these phrases as a variable in our dataset as seen in Table \ref{table:additional_variables}. Figure \ref{figure:key_phrases_example} gives an example of phrases extracted from a movie plot summary by AutoPhrase.
 
@@ -89,9 +89,9 @@ Our analysis consists of three parts that build off of these extracted phrases:
     \item The development and interpretation of a classification model that predicts movie genre.
     \item The development and interpretation of a clustering model that clusters movies.
 \end{enumerate}
-The combination of these three methods can give us valuable insight into human culture.
+We expect the combination of these three methods to give us valuable insight into human culture.
 \subsection{EDA}
-We perform an EDA to discover how human culture and events have progressed over time. Here, we use statistical signals, i.e., tf-idf, to identity when certain phrases (corresponding to discrete entities of of human culture and events) are popular and relevant.
+We perform an EDA to discover how human culture and events have progressed over time. Here, we use statistical signals, i.e., tf-idf, to identify when certain phrases (corresponding to discrete entities of human culture and events) are popular and relevant.
 
 We use tf-idf to measure a phrase's relevance in time where each phrase is a term and each period of time (e.g. a year or decade) is a document. We use sublinear term frequency (tf) scaling to reduce the significance of very common phrases (e.g. ``film'', ``life'') that are uninformative in our analysis.
 
@@ -109,7 +109,7 @@ Finally, we define ``top'' phrases as the phrases with the highest tf-idf values
 \subsection{EDA}
 Figure \ref{figure:top_phrases_by_decade} shows top phrases by decade, where top phrases are defined earlier as the phrases with the highest tf-idf values for the corresponding decade.
 
-To provide context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade. In the case of a tie in gross revenue, we pick the movie with the earliest release date.
+To provide context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade. In the case of a tie in gross revenue, we pick the movie with the earlier release date.
 
 We now examine the results by decade:
 \begin{itemize}
@@ -127,7 +127,7 @@ We now examine the results by decade:
     \item 2010s:
 \end{itemize}
 
-Figure \ref{figure:top_phrases_by_year} in \nameref{appendix} goes into finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}.
+Figure \ref{figure:top_phrases_by_year} in \nameref{appendix} goes into finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}. Here, we observe a similar trend of top phrases across time but also observe phrases that are peculiar to each year.
 
 \begin{figure*}
 \caption{Top phrases by decade, with corresponding highest-grossing movie}
