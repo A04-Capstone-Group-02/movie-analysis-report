@@ -109,6 +109,13 @@ Finally, we define ``top'' phrases as the phrases with the highest tf-idf values
 \subsection{EDA}
 Figure \ref{figure:top_phrases_by_decade} shows top phrases by decade, where top phrases are defined earlier as the phrases with the highest tf-idf values for the corresponding decade.
 
+\begin{figure*}
+\caption{Top phrases by decade, with corresponding highest-grossing movie}
+\centering
+\includegraphics[width=.95\textwidth]{figures/top_phrases_by_decade_bar_chart.png}
+\label{figure:top_phrases_by_decade}
+\end{figure*}
+
 To provide context, we annotate each phrase with the name and year of the highest-grossing movie out of all movies that contain that phrase in that decade. In the case of a tie in gross revenue, we pick the movie with the earlier release date.
 
 We now examine the results by decade:
@@ -119,22 +126,15 @@ We now examine the results by decade:
     \item \textit{1930s}: We see the appearance of movie characters Alfafa, Buckwheat, Spanky, and Stymie from the \textit{Our Gang} comedy series, Betty Boop and Bimbo from the \textit{Talkartoon} and \textit{Betty Boop} cartoon series, actors Robert Armstrong from \textit{King Kong} and Edward Arnold from \textit{Mr. Smith Goes to Washington}, and the reappearance of Stan and Ollie.
     \item \textit{1940s}: Many of the top phrases and their corresponding top movies in this decade relate to World War II, fought from 1939 to 1945, including the phrases ``World War II'' and ``Nazi'' and the movies \textit{Foreign Correspondent}, \textit{The Best Years of Our Lives}, \textit{The White Cliffs of Dover}, and \textit{Hitler's Children}. We see the appearance of movie characters Mammy Two Shoes from the the \textit{Tom and Jerry} cartoon series, Daffy Duck from the \textit{Looney Tunes} and \textit{Merrie Melodies} cartoon series, actors Moe and Larry, the two mainstay members of The Three Stooges, a famous comedy team active from the 1920s to 1970s (the third stooge changed multiple times throughout the team's history) and Harry Davenport from \textit{Foreign Correspondent}, and the reappearance of Buckwheat.
     \item \textit{1950s}: We continue to see phrases and movies relating to World War II, including the movie \textit{Giant}. We see the appearance of movie characters The Bowery Boys and the reappearance of Moe and Larry. We also see the phrase ``Puddy Tat'' from Tweety's catchphrase ``I Taut I Taw a Puddy-Tat'' from the Sylvester and Tweety cartoons and the phrase ``mousehole'' from the \textit{Tom and Jerry} cartoon series.
-    \item \textit{1960s}: We continue to see phrases and movies relating to World War II, including the movie \textit{Charade}. We see the use of the phrase ``beatnik'', a media stereotype prevalent from the 1940s to 1960s associated with the nonconformist Beat Generation literary movement in the post-war era, whose elements were later incorporated into the hippie movement and other counterculture movements. We see the appearance of movie characters Speedy Gonzales from the \textit{Looney Tunes} and \textit{Merrie Melodies} cartoon series.
-    \item \textit{1970s}: Many of the top phrases and their corresponding top movies in this decade relate to the Vietnam War, fought from 1955 to 1975, including the phrases ``Vietnam'' and ``Vietnam War''. Other top phrases and their corresponding top movies relate to martial arts, including the phrases ``kung fu'' and ``Shaolin''. During this time, martial arts movies rose in popularity, such as those featuring Bruce Lee, leading to an increase in Asian and Asian American representation in cinema.
-    \item \textit{1980s}:
-    \item \textit{1990s}:
-    \item \textit{2000s}:
+    \item \textit{1960s}: We continue to see phrases and movies relating to World War II. We see the use of the phrase ``beatnik'', a media stereotype prevalent from the 1940s to 1960s associated with the nonconformist Beat Generation literary movement in the post-war era, whose elements were later incorporated into the hippie movement and other counterculture movements. We see the appearance of movie characters Speedy Gonzales from the \textit{Looney Tunes} and \textit{Merrie Melodies} cartoon series.
+    \item \textit{1970s}: Many of the top phrases and their corresponding top movies in this decade relate to the Vietnam War, fought from 1955 to 1975, including the phrases ``Vietnam'' and ``Vietnam War''. Other top phrases and their corresponding top movies relate to martial arts, including the phrases ``kung fu'' and ``Shaolin''. During this time, martial arts movies rose in popularity, such as those featuring Bruce Lee, which helped lead to an increase in Asian and Asian American representation in cinema. We see the appearance of movie characters Tora-san from the \textit{Otoko wa Tsurai yo} Japanese film series and film historian and critic Stuart Galbraith IV.
+    \item \textit{1980s}: We continue to see phrases and movies relating to the Vietnam War. We see the appearance of America's CIA, founded in 1947, and the Soviet Union's KGB, formed in 1954, two opposing security/intelligence agencies whose appearance in movies may have been popularized by the Cold War during this time period. We see the appearance of Indian cinema in the form of actors Mithun Chakraborty from \textit{Kismet}, considered to be one of the foundational films of Bollywood, Lizy from \textit{Arante Mulla Kochu Mulla}, and Rati Agnihotri from \textit{Ullasa Paravaigal}. We see the reappearance of Tora-San and Stuart Galbraith IV.
+    \item \textit{1990s}: The top phrase in this decade is ``HIV'', which was first clinically observed in 1981, triggering much of the early HIV/AIDS research in the 1980s. This development may have led to HIV/AIDS being recognized by popular culture in the following years; in fact, the corresponding top movie, \textit{Philadelphia}, was one of the first mainstream Hollywood movies to mention HIV/AIDS. We continue to see phrases and movies relating to the CIA and Vietnam War. We see technologies that may have been more readily accessible to consumers in the late 20th century, such as ``video'', ``tv'', ``videotape``, and ``answering machine''. We see the appearance of movie character Simran Singh from another Bollywood movie, \textit{Dilwale Dulhania Le Jayenge} and the reappearance of Mithun.
+    \item \textit{2000s}: The top phrase in this decade is ``heart attack''. Cardiovascular disease 
     \item \textit{2010s}:
 \end{itemize}
 
 Figure \ref{figure:top_phrases_by_year} in \nameref{appendix} goes into much finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}. Here, we observe a similar trend of top phrases across time but also observe phrases that are peculiar to each year.
-
-\begin{figure*}
-\caption{Top phrases by decade, with corresponding highest-grossing movie}
-\centering
-\includegraphics[width=.95\textwidth]{figures/top_phrases_by_decade_bar_chart.png}
-\label{figure:top_phrases_by_decade}
-\end{figure*}
 
 \subsection{Classification}
 \subsection{Clustering}
