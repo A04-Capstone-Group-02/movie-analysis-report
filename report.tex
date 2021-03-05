@@ -78,7 +78,7 @@ We first train AutoPhrase on all movie plot summaries in the dataset, then extra
 \begin{figure*}
 \caption{Example of phrases extracted by AutoPhrase}
 \begin{quoting}[leftmargin=.1\textwidth]
-\small\textit{The \hl{film} begins with an opening crawl explaining that the \hl{galaxy} is in a \hl{state} of \hl{civil war} and that spies for the \hl{Rebel Alliance} have \hl{stolen} plans to the Galactic Empire's \hl{Death Star}, a \hl{heavily armed} and armored \hl{space station} capable of annihilating an \hl{entire planet}. \hl{Rebel leader} \hl{Princess Leia} is in possession of the plans, but her \hl{ship} is captured by Imperial forces under the command of the evil \hl{lord} \hl{Darth Vader}. Before she is captured, \hl{Leia} hides the plans in the \hl{memory} of an astromech droid called \hl{R2-D2} , along with a holographic \hl{recording}. The small droid flees to the surface of the \hl{desert planet} \hl{Tatooine} with \hl{fellow} protocol droid \hl{C-3PO} . The \hl{droids} are quickly captured by\ldots}
+\small\textit{The \hl{film} begins with an opening crawl explaining that the \hl{galaxy} is in a \hl{state} of \hl{civil war} and that spies for the \hl{Rebel Alliance} have \hl{stolen} plans to the Galactic Empire's \hl{Death Star}, a \hl{heavily armed} and armored \hl{space station} capable of annihilating an \hl{entire planet}. \hl{Rebel leader} \hl{Princess Leia} is in possession of the plans, but her \hl{ship} is captured by Imperial forces under the command of the evil \hl{lord} \hl{Darth Vader}. Before she is captured, \hl{Leia} hides the plans in the \hl{memory} of an astromech droid called \hl{R2-D2} , along with a holographic \hl{recording}. The small droid flees to the surface of the \hl{desert planet} \hl{Tatooine} with \hl{fellow} protocol droid \hl{C-3PO} . The \hl{droids} are quickly captured by \ldots}
 \end{quoting}
 \label{figure:key_phrases_example}
 \end{figure*}
@@ -101,10 +101,24 @@ Here, the tf-idf with sublinear tf scaling for a term $t$ of a document $d$ is g
 $$\text{tf-idf}(t, d) = (1 + \log\text{tf}(t, d)) \cdot \left(\log\frac{1 + n}{\text{1 + df}(t)} + 1\right)$$
 where $n$ is the total number of documents and $\text{df}(t)$ is the document frequency of $t$.
 
-Given a tf-idf vector for each period of time, we then normalize each tf-idf vector to have a Euclidean norm of 1.
+Given a TF-IDF vector for each period of time, we then normalize each TF-IDF vector to have a Euclidean norm of 1.
 
-Finally, we define ``top'' phrases as the phrases with the highest tf-idf values for the corresponding period of time.
+Finally, we define ``top'' phrases as the phrases with the highest TF-IDF values for the corresponding period of time.
 \subsection{Classification}
+   Classifying movie genres using movie plot summaries examines the power of phrase mining and explores its application in information extraction in movie sector. The results from the classification can also disclose some implicit features of movie genres through important phrases. To obtain ideal results, we construct a baseline model: 
+   
+   1) Using TF-IDF vectorizer for words embedding
+   
+   2) Construct multiple logistic regressions using OneVsRest Classifier for each genre to predict the label. 
+   
+   3) Evaluating the model use f-1 score. We also use some costumed indicator - percentage of correctly predicted label and 
+   
+   We further develop our model trying different algorithms in OneVsRest Classifier including LinearSVC and neural network classifier. Also we perform GridSearch for hyper-parameters tuning, trying out different regularization penalty for best performances.
+   We construct the text feature using all non-stopwords in plot summaries as well as phrases of these summaries returned by Autophrase. We then compare the results using these two features to explore the contribution of phrases in the model.
+   
+   
+   
+
 \subsection{Clustering}
 
 \section{Results} % What did I find out?
