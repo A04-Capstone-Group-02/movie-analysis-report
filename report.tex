@@ -104,6 +104,8 @@ where $n$ is the total number of documents and $\text{df}(t)$ is the document fr
 Given a TF-IDF vector for each period of time, we then normalize each TF-IDF vector to have a Euclidean norm of 1.
 
 Finally, we define ``top'' phrases as the phrases with the highest TF-IDF values for the corresponding period of time.
+
+
 \subsection{Classification}
    Classifying movie genres using movie plot summaries examines the power of phrase mining and explores its application in information extraction in movie sector. The results from the classification can also disclose some implicit features of movie genres through important phrases. To obtain ideal results, we construct a baseline model: 
    
@@ -118,8 +120,19 @@ Finally, we define ``top'' phrases as the phrases with the highest TF-IDF values
    
    
    
-
 \subsection{Clustering}
+
+\begin{figure*}
+\caption{The clustering pipeline}
+\centering
+\includegraphics[width=5in]{figures/clustering_pipeline.png}
+\label{figure:clustering_pipeline}
+\end{figure*}
+
+
+
+
+
 
 \section{Results} % What did I find out?
 \subsection{EDA}
