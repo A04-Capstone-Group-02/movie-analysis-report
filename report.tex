@@ -21,7 +21,7 @@ Here, we propose an analysis of movies by extracting key phrases corresponding t
 
 This analysis is novel since we extract human culture from movies, an unconventional source, instead of relying on traditional sources, e.g., historical texts; we expect such a study to provide a unique perspective as a result. In addition, we expect such a study to be especially useful for history and anthropology non-experts, as we extract accessible key phrases that serve as relevant keywords for further research by the reader.
 
-Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to simply extract n-grams using raw term frequencies, which often leads to incomplete or spurious phrases, instead of using a dedicated and sophisticated phrase mining framework that is capable of extracting complete and coherent key phrases, such as the \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} framework \cite{DBLP:journals/corr/ShangLJRVH17}.
+Previous work addresses either a textual analysis of movie plots or the use of phrase mining for natural language processing, but not both. Previous analyses of movies are limited as they tend to simply extract n-grams using raw term frequencies, which often leads to incomplete or spurious phrases, instead of using a dedicated and sophisticated phrase mining framework that is capable of extracting complete and coherent key phrases, such as the \href{https://github.com/shangjingbo1226/AutoPhrase}{AutoPhrase} framework \cite{Shang2018AutomatedPM}.
 
 Here, we use AutoPhrase to explore a novel approach by applying phrase mining to the analysis of movies.
 
@@ -60,7 +60,7 @@ Although movies can come from different countries and may be in different langua
 The variable of focus here is \texttt{summary}, from which we extract key phrases to drive our analysis.
 
 \section{Methods} % How did I approach it?
-We first extract key phrases from \texttt{summary} using AutoPhrase \cite{DBLP:journals/corr/ShangLJRVH17}, a phrase mining framework that extracts high-quality phrases from a given text. We use AutoPhrase for its ability to extract high-quality phrases more effectively than traditional, rudimentary, phrase mining techniques, while maintaining minimal human effort during training.
+We first extract key phrases from \texttt{summary} using AutoPhrase \cite{Shang2018AutomatedPM}, a phrase mining framework that extracts high-quality phrases from a given text. We use AutoPhrase for its ability to extract high-quality phrases more effectively than traditional, rudimentary, phrase mining techniques, while maintaining minimal human effort during training.
 
 We first train AutoPhrase on all movie plot summaries in the dataset, then extract the key phrases from each individual summary and add these phrases as a variable in our dataset as seen in Table \ref{table:additional_variables}. Figure \ref{figure:key_phrases_example} gives an example of phrases extracted from a movie plot summary by AutoPhrase.
 
@@ -111,12 +111,22 @@ Finally, we define ``top'' phrases as the phrases with the highest TF-IDF values
    
    1) Using TF-IDF vectorizer for words embedding
    
-   2) Construct multiple logistic regressions using OneVsRest Classifier for each genre to predict the label. 
+   2) Construct multiple logistic regressions inside OneVsRest Classifier for each genre to predict the label. 
    
    3) Evaluating the model use f-1 score. We also use some costumed indicator - percentage of correctly predicted label and 
    
-   We further develop our model trying different algorithms in OneVsRest Classifier including LinearSVC and neural network classifier. Also we perform GridSearch for hyper-parameters tuning, trying out different regularization penalty for best performances.
-   We construct the text feature using all non-stopwords in plot summaries as well as phrases of these summaries returned by Autophrase. We then compare the results using these two features to explore the contribution of phrases in the model.
+   We further improve our model in following ways: 
+   
+   1) We try out different algorithms in OneVsRest Classifier including LinearSVC and Multi-linear Perceptron classifier. 
+   2) We perform GridSearch for hyper-parameters tuning, changing different loss function and different regularization penalty for best performance.
+   
+   We also construct the text feature in two ways
+   
+   1) Use all non-stopwords in plot summaries
+   
+   2) Use only extracted phrases of these summaries by Autophrase.
+   
+   We can compare the results from these two approaches to explore the contribution of phrases to the model.
    
    
    
@@ -129,8 +139,34 @@ Finally, we define ``top'' phrases as the phrases with the highest TF-IDF values
 \label{figure:clustering_pipeline}
 \end{figure*}
 
+We build a clustering pipeline on the movie plot summaries to discover relationships between movies in a marginally supervised perspective. As shown in Figure \ref{figure:clustering_pipeline}, our clustering pipeline contains three major components: (1) build and fine-tune a sentence transformer to acquire document embeddings, (2) pick representative sentences to condense plot summaries, and (3) cluster document embeddings.
+
+\subsubsection{Model}
+We purpose to estimate the document embeddings based on a pre-trained sentence transformer (\cite{reimers-gurevych-2019-sentence}). Experiments in \cite{aharoni-goldberg-2020-unsupervised} show that the contextualized embeddings generated by pre-trained language models have the capability to preserve domain information. Compared with vanilla transformer networks, sentence transformers are further tailored to estimate contextualized sentence embeddings for semantic similarity tasks (\cite{reimers-gurevych-2019-sentence}). Therefore, the sentence transformer is the strongest out-of-the-box model we can utilize.
+
+Since the sentence transformer expects sentences as input, we split each summary into sentences, acquire an embedding for each sentence, and average the embeddings to form document embeddings.
+
+\begin{figure*}
+\caption{Number of sentences per document (plot summary)}
+\centering
+\includegraphics[width=5in]{figures/sents_per_doc.png}
+\label{figure:sents_per_doc}
+\end{figure*}
+
+\subsubsection{Condense plot summaries}
+As shown in Figure \ref{figure:sents_per_doc}, the distribution of the number of sentences in each movie summary is a long-tailed distribution, where 46.05\% of summaries have more than 10 sentences. Since the transformer truncates the document to a fixed length, the embeddings acquired from the model cannot fully capture the semantics of long summaries. Therefore, it is necessary to condense the movie summaries while preserving most of the gist.
+
+We purpose to rank the importance of the sentences and choose sentences with top-k importance to represent the entire summary. Here, we define the importance as the average sublinear TF-IDF score, where the dictionary of terms is only the quality phrases. Under this notion of importance, sentences with no quality phrases have an importance score of 0, and sentences with more uncommon quality phrases have a higher importance score. If the document has fewer than $k$ sentences, we keep all sentences. If the document contains no quality phrases, we sample $k$ sentences randomly. To acquire the document embeddings, we only use representative sentences instead of all sentences.
+
+\subsubsection{Fine-tuning}
+Fine-tuning a pre-trained language model with a specific downstream task is a common practice to enhance the model performance. In our clustering pipeline, we use semantic similarity as the downstream task, since we expect documents with similar meanings to have closer embeddings, and vice versa. 
+For two pairs of sentences, we determine the similarity by finding whether the genres associated with these sentences have overlap. To generate the training dataset, we iteratively sample sentence pairs until the training dataset contains at least $n$ pairs, where half of the pairs have positive labels and the other half have negative labels. In each iteration, the algorithm samples two documents from the dataset, generates the binary label based on their genres, and selects $k$ sentence pairs from two documents.
+
+We use the Contrastive Loss (\cite{1640964}) as the fine-tune target, since it aims to decrease the distance between sentence embeddings of similar sentence pairs and increase the distance between sentence embeddings of dissimilar sentence pairs.
 
 
+\subsubsection{Cluster embeddings}
+Following the practices in \cite{aharoni-goldberg-2020-unsupervised}, we first reduce the dimensions of embeddings to 50 with PCA, then cluster the dimension-reduced embeddings using Gaussian Mixture Model (GMM). \cite{aharoni-goldberg-2020-unsupervised} explained that the mixture model is more suitable since we can view each document embedding as from a mixture of different domain distributions, and applying PCA to the embeddings accelerates the training process while marginally damaging the performance.
 
 
 
@@ -168,12 +204,24 @@ We can see that examining and researching top phrases over time gives us valuabl
 Figure \ref{figure:top_phrases_by_year} in \nameref{appendix} goes into much finer detail by showing top phrases by year instead of decade and is also available as an \href{https://www.youtube.com/watch?v=8aOob6iJO5Y}{animation}. There, we observe a similar trend of top phrases across time but also observe phrases that are peculiar to each year.
 
 \subsection{Classification}
+Our baseline had a result F-1 score 0.332 using whole summaries as feature and 0.29 using phrases. Our final model had a result F-1 score of 0.407 using summaries and 0.364 using phrases.
+We extract the coefficients of words from the classifiers to understand what words matter most for each genre. It helps to evaluate the model as well as deliver some insights on cbn vb4rty5The plot shows the coefficients of words from baseline and our final model using those two approaches to construct the text feature. 
+
+
+
 \subsection{Clustering}
+
+
+
+
+
+
+
 
 \section{Discussion} % What did it mean?
 In this paper, we apply phrase mining to movie plots, a novel approach for the textual analysis of movies, for a unique insight into human culture.
 
-In the EDA investigation, we use statistical signals to select the most relevant phrases describing each time period. In the classification investigation, \ldots. In the clustering investigation, \ldots.
+In the EDA investigation, we use statistical signals to select the most relevant phrases describing each time period. In the classification investigation, \ldots. In the clustering investigation, we utilize quality phrases and pre-trained language models to discover the relationship between movies in a nearly unsupervised approach.
 
 In each of these investigations, we demonstrate phrase mining's effectiveness in producing valuable insight into human culture.
 

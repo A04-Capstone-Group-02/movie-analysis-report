@@ -1,20 +1,10 @@
-@article{DBLP:journals/corr/ShangLJRVH17,
-  author    = {Jingbo Shang and
-               Jialu Liu and
-               Meng Jiang and
-               Xiang Ren and
-               Clare R. Voss and
-               Jiawei Han},
-  title     = {Automated Phrase Mining from Massive Text Corpora},
-  journal   = {CoRR},
-  volume    = {abs/1702.04457},
-  year      = {2017},
-  url       = {http://arxiv.org/abs/1702.04457},
-  archivePrefix = {arXiv},
-  eprint    = {1702.04457},
-  timestamp = {Mon, 13 Aug 2018 16:46:43 +0200},
-  biburl    = {https://dblp.org/rec/journals/corr/ShangLJRVH17.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
+@article{Shang2018AutomatedPM,
+  title={Automated Phrase Mining from Massive Text Corpora},
+  author={Jingbo Shang and Jialu Liu and Meng Jiang and Xiang Ren and Clare R. Voss and Jiawei Han},
+  journal={IEEE Transactions on Knowledge and Data Engineering},
+  year={2018},
+  volume={30},
+  pages={1825-1837}
 }
 
 @inproceedings{10.1145/2723372.2751523,
@@ -40,4 +30,45 @@ series = {SIGMOD '15}
   author={David Bamman and Brendan T. O'Connor and Noah A. Smith},
   booktitle={ACL},
   year={2013}
+}
+
+@inproceedings{reimers-gurevych-2019-sentence,
+    title = "Sentence-{BERT}: Sentence Embeddings using {S}iamese {BERT}-Networks",
+    author = "Reimers, Nils  and
+      Gurevych, Iryna",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-1410",
+    doi = "10.18653/v1/D19-1410",
+    pages = "3982--3992",
+    abstract = "BERT (Devlin et al., 2018) and RoBERTa (Liu et al., 2019) has set a new state-of-the-art performance on sentence-pair regression tasks like semantic textual similarity (STS). However, it requires that both sentences are fed into the network, which causes a massive computational overhead: Finding the most similar pair in a collection of 10,000 sentences requires about 50 million inference computations ({\textasciitilde}65 hours) with BERT. The construction of BERT makes it unsuitable for semantic similarity search as well as for unsupervised tasks like clustering. In this publication, we present Sentence-BERT (SBERT), a modification of the pretrained BERT network that use siamese and triplet network structures to derive semantically meaningful sentence embeddings that can be compared using cosine-similarity. This reduces the effort for finding the most similar pair from 65 hours with BERT / RoBERTa to about 5 seconds with SBERT, while maintaining the accuracy from BERT. We evaluate SBERT and SRoBERTa on common STS tasks and transfer learning tasks, where it outperforms other state-of-the-art sentence embeddings methods.",
+}
+
+@inproceedings{aharoni-goldberg-2020-unsupervised,
+    title = "Unsupervised Domain Clusters in Pretrained Language Models",
+    author = "Aharoni, Roee  and
+      Goldberg, Yoav",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.692",
+    doi = "10.18653/v1/2020.acl-main.692",
+    pages = "7747--7763",
+    abstract = "The notion of {``}in-domain data{''} in NLP is often over-simplistic and vague, as textual data varies in many nuanced linguistic aspects such as topic, style or level of formality. In addition, domain labels are many times unavailable, making it challenging to build domain-specific systems. We show that massive pre-trained language models implicitly learn sentence representations that cluster by domains without supervision {--} suggesting a simple data-driven definition of domains in textual data. We harness this property and propose domain data selection methods based on such models, which require only a small set of in-domain monolingual data. We evaluate our data selection methods for neural machine translation across five diverse domains, where they outperform an established approach as measured by both BLEU and precision and recall with respect to an oracle selection.",
+}
+
+@inproceedings{1640964,
+  author={Hadsell, Raia and Chopra, Sumit and Lecun, Yann},
+  booktitle={2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'06)}, 
+  title={Dimensionality Reduction by Learning an Invariant Mapping}, 
+  year={2006},
+  volume={2},
+  number={},
+  pages={1735-1742},
+  doi={10.1109/CVPR.2006.100}
 }
